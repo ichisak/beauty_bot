@@ -1,7 +1,11 @@
 import requests
+from dotenv import load_dotenv
+import os
 
-MISSKEY_INSTANCE = "https://kmmi-skey.com/"  # 自分のMisskeyインスタンスのURL
-API_TOKEN = "lARnsD6Q0BAwvIr0l3t90Ob6veMh561V"  # 発行したAPIトークン
+load_dotenv()
+
+MISSKEY_INSTANCE = os.getenv("MISSKY_URL")  # 自分のMisskeyインスタンスのURL
+API_TOKEN = os.getenv("API_TOKEN") # 発行したAPIトークン
 
 def post_to_misskey(text):
     url = f"{MISSKEY_INSTANCE}api/notes/create"
