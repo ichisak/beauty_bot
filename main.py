@@ -2,7 +2,9 @@ from post_to_misskey import post_to_misskey # Misskey投稿関数をインポー
 from datetime import datetime
 import os
 import json
+from flask import Flask, request
 
+app = Flask(__name__)
 
 #ログファイル設定
 LOG_FILE = "log.txt"
@@ -69,3 +71,14 @@ def post_articles():
 if __name__ == "__main__":
     post_articles()
 
+def beauty_bot_logic():
+    result = post_articles()
+    return "Beauty Bot is working!"
+
+@app.route("/", methods=["GET", "POST"])
+def handle_request():
+    return beauty_bot_logic()
+
+# Cloud Functions 用のエントリポイント
+def beauty_bot_function(request):
+    return beauty_bot_logic()
