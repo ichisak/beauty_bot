@@ -33,7 +33,7 @@ def save_articles(filename, articles):
 articles = load_articles(JSON_FILE)
 
 # Misskeyに投稿
-POST_COUNT = 3
+POST_COUNT = 2
 
 def post_articles():
     articles = load_articles(JSON_FILE)
