@@ -1,3 +1,7 @@
 .env
-.txt
 .json
+.env.yaml
+.venv
+venv/
+beauty_bot_function/venv/
+beauty_bot_scrapper/venv/
