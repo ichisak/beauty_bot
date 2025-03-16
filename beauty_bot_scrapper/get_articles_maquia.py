@@ -43,32 +43,7 @@ def maquia_scraper():
 
     return results  # 記事のリストを返す
 
-def save_unique_results(results,filename="articles.json"):
-    if os.path.exists(filename):
-         with open(filename,"r",encoding="utf-8") as f:
-            try:
-                existing_results = json.load(f)
-            except json.JSONDecodeError:
-                existing_results = []
-    else:
-            existing_results = []
-
-    #すでに存在するデータをチェック
-    existing_links = {item["link"] for item in existing_results}
-    unique_results = [item for item in results if item["link"] not in existing_links]
-
-    # 新しいデータがあれば追加
-    if unique_results:
-        existing_results.extend(unique_results)
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(existing_results, f, ensure_ascii=False, indent=4)
-            log_message(f"{len(unique_results)}件の新規記事を保存しました。（MAQUIA）")
-    else:
-        log_message(f"新規記事はありませんでした。（MAQUIA）")
-    return len(unique_results)  # 追加したデータ数を返す
-
 
 # 関数を呼び出して出力
 if __name__ == "__main__":
     articles = maquia_scraper()
-    save_unique_results(articles)

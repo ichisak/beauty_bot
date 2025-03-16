@@ -46,34 +46,8 @@ def voce_scraper():
 
     return results
 
-def save_unique_results(results,filename="articles.json"):
-    if os.path.exists(filename):
-         with open(filename,"r",encoding="utf-8") as f:
-            try:
-                existing_results = json.load(f)
-            except json.JSONDecodeError:
-                existing_results = []
-    else:
-            existing_results = []
-
-    #すでに存在するデータをチェック
-    existing_links = {item["link"] for item in existing_results}
-    unique_results = [item for item in results if item["link"] not in existing_links]
-
-    # 新しいデータがあれば追加
-    if unique_results:
-        existing_results.extend(unique_results)
-        with open(filename, "w", encoding="utf-8") as f:
-            json.dump(existing_results, f, ensure_ascii=False, indent=4)
-            log_message(f"{len(unique_results)}件の新規記事を保存しました。（VoCE）")
-    else:
-        log_message(f"新規記事はありませんでした。（VoCE）")
-
-    return len(unique_results)  # 追加したデータ数を返す
-
-
 # 実行して結果を表示
 if __name__ == "__main__":
     articles = voce_scraper()
-    save_unique_results(articles)
+
 
